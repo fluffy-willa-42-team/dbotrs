@@ -10,9 +10,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Install dependencies
-      run: sudo zypper refresh && sudo zypper install -y gcc
-
     - name: Setup Rust
       uses: actions-rs/toolchain@v1
       with:
