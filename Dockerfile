@@ -1,14 +1,18 @@
-# Use the official Rust image as the base image
-FROM rust:latest
+# First stage: Build the application
+FROM rust:latest AS builder
 
-# Set the working directory
 WORKDIR /usr/src/app
 
-# Copy over your source code
 COPY . .
 
-# Build the application
 RUN cargo build --release
 
-# Set the command to run your application
-CMD DISCORD_TOKEN=$DISCORD_TOKEN cargo run
+# Second stage: Run the application
+FROM debian:buster-slim
+
+WORKDIR /app
+
+# Copy the binary from the builder stage
+COPY --from=builder /usr/src/app/target/release/dbotrs .
+
+CMD DISCORD_TOKEN=$DISCORD_TOKEN ./dbotrs
