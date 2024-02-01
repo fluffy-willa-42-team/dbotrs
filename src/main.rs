@@ -58,6 +58,6 @@ async fn ping(ctx: &Context, msg: &Message) -> CommandResult {
 async fn date(ctx: &Context, msg: &Message) -> CommandResult {
     let date = chrono::Local::now();
     msg.reply(ctx, format!("The current date and time is: {}", date)).await?;
-
+    print!("The current date and time is: {}", date);
     Ok(())
 }
