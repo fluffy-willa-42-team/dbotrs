@@ -9,6 +9,7 @@ use serenity::framework::standard::{StandardFramework, Configuration, CommandRes
 
 #[group]
 #[commands(ping)]
+#[commands(date)]
 struct General;
 
 struct Handler;
