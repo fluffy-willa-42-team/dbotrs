@@ -6,7 +6,7 @@
 	// "image": "mcr.microsoft.com/devcontainers/rust:1-1-bullseye",
 	"service": "devcontainer",
 	"dockerComposeFile": "docker-compose.yml",
-	"workspaceFolder": "/workspace/${localWorkspaceFolderBasename}",
+	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
 	"customizations": {
 		"vscode": {
 			"extensions": [
