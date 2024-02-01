@@ -16,7 +16,9 @@ struct Handler;
 #[async_trait]
 impl EventHandler for Handler {
     async fn ready(&self, ctx: Context, ready: serenity::model::gateway::Ready) {
+
         ctx.set_activity(Some(ActivityData::playing("H- hiiii~~")));
+
         println!("{} is connected!", ready.user.name);
     }
 }
@@ -28,14 +30,14 @@ async fn main() {
 
     // Login with a bot token from the environment
     let token = env::var("DISCORD_TOKEN").expect("token");
+
     let intents = GatewayIntents::non_privileged() | GatewayIntents::MESSAGE_CONTENT;
+
     let mut client = Client::builder(token, intents)
         .event_handler(Handler)
         .framework(framework)
         .await
         .expect("Error creating client");
-
-    
 
     // start listening for events by starting a single shard
     if let Err(why) = client.start().await {
@@ -46,8 +48,16 @@ async fn main() {
 #[command]
 async fn ping(ctx: &Context, msg: &Message) -> CommandResult {
     msg.reply(ctx, "P-pOwOng! ").await?;
-	msg.react(ctx, '👉').await?;
-	msg.react(ctx, '👈').await?;
+    msg.react(ctx, '👉').await?;
+    msg.react(ctx, '👈').await?;
+
+    Ok(())
+}
+
+#[command]
+async fn date(ctx: &Context, msg: &Message) -> CommandResult {
+    let date = chrono::Local::now();
+    msg.reply(ctx, format!("The current date and time is: {}", date)).await?;
 
     Ok(())
 }
